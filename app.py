@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import od
+import os
 from langchain_community.document_loaders import CSVLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings

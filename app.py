@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
+import od
 from langchain_community.document_loaders import CSVLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_groq import ChatGroq
-import streamlit as st
 groq_api_key = st.secrets["GROQ_API_KEY"]
 st.set_page_config(page_title="FinSight AI")
 st.title("FinSight AI - Startup Funding Assistant")
@@ -31,7 +31,7 @@ if query:
     docs = retriever.invoke(query)
     context = "\n\n".join([d.page_content for d in docs])
     
-    llm = ChatGroq(groq_api_key=GROQ_KEY, model_name="openai/gpt-oss-20b")
+    llm = ChatGroq(groq_api_key=groq_api_key, model_name="openai/gpt-oss-20b")
     
     prompt = f"Context: {context}\n\nQuestion: {query}\n\nAnswer using world knowledge+context.Give global startups list:"
     response = llm.invoke(prompt)
